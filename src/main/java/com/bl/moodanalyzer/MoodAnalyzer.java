@@ -21,5 +21,11 @@ public class MoodAnalyzer {
         MoodAnalyzer analyser = new MoodAnalyzer("I am feeling sad today");
         String mood = analyser.analyseMood();
         System.out.println("Mood: " + mood);
+        MoodAnalyzer.testAnalyseMood();
+    }
+    public static void testAnalyseMood() {
+        MoodAnalyzer analyser = new MoodAnalyzer("I am in Sad Mood");
+        String mood = analyser.analyseMood();
+        assert mood.equals("Sad") : "Test Case 1.1 Failed";
     }
 }
