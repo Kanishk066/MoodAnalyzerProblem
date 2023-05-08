@@ -27,5 +27,9 @@ public class MoodAnalyzer {
         MoodAnalyzer analyser = new MoodAnalyzer("I am in Sad Mood");
         String mood = analyser.analyseMood();
         assert mood.equals("Sad") : "Test Case 1.1 Failed";
+
+        analyser = new MoodAnalyzer("I am in Any Mood");
+        mood = analyser.analyseMood();
+        assert mood.equals("Happy") : "Test Case 1.2 Failed";
     }
 }
