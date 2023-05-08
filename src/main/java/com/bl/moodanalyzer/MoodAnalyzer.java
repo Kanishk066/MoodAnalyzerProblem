@@ -1,44 +1,40 @@
 package com.bl.moodanalyzer;
+enum ExceptionType {
+    NULL_MESSAGE, EMPTY_MESSAGE, NO_SUCH_FIELD, NO_SUCH_METHOD, NO_SUCH_CLASS, OBJECT_CREATION_ISSUE
+}
 
+class MoodAnalysisException extends Exception {
+    private ExceptionType type;
+
+    public MoodAnalysisException(ExceptionType type, String message) {
+        super(message);
+        this.type = type;
+    }
+}
 public class MoodAnalyzer {
-    private String message;
-
-    public MoodAnalyzer() {
-        this.message = "";
+     String message;
+    public MoodAnalyzer() throws MoodAnalysisException {
+        throw new MoodAnalysisException(ExceptionType.EMPTY_MESSAGE, "Message should not be empty");
     }
 
-    public MoodAnalyzer(String message) {
+    public MoodAnalyzer(String message) throws MoodAnalysisException {
+        if (message == null || message.isEmpty()) {
+            throw new MoodAnalysisException(ExceptionType.NULL_MESSAGE, "Message should not be null");
+        }
         this.message = message;
     }
-    public String analyseMood() {
+
+    public String analyseMood() throws MoodAnalysisException {
         try {
             if (message.contains("sad")) {
                 return "Sad";
             } else {
                 return "Happy";
             }
+        } catch (NullPointerException e) {
+            throw new MoodAnalysisException(ExceptionType.NULL_MESSAGE, "Message should not be null");
         }
-        catch (NullPointerException e){
-                return "Happy";
-            }
-        }
-    public static void main(String[] args) {
-        MoodAnalyzer analyser = new MoodAnalyzer("I am feeling happy");
-        String mood = analyser.analyseMood();
-        System.out.println("The mood is " + mood);
-        MoodAnalyzer.testAnalyseMood();
     }
-    public static void testAnalyseMood(){
-        MoodAnalyzer analyser = new MoodAnalyzer("I am in Sad Mood");
-       String mood = analyser.analyseMood();
-        assert mood.equals("Sad") : "Test Case 1.1 (with constructor) Failed";
-
-        analyser = new MoodAnalyzer("I am in Any Mood");
-        mood = analyser.analyseMood();
-        assert mood.equals("Happy") : "Test Case 1.2 Failed";
-
-        analyser = new MoodAnalyzer(null);
-        mood = analyser.analyseMood();
-        assert mood.equals("Happy") : "Test Case 2.1 Failed";
+    public static void main(String[] args) {
     }
 }
