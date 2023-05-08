@@ -42,8 +42,10 @@ public class MoodAnalyzer {
         } catch (MoodAnalysisException e) {
             assert e.type.equals(ExceptionType.NULL_MESSAGE) : "Test Case 3.1 Failed";
         }
+
         try {
             analyser = new MoodAnalyzer("");
+            analyser.analyseMood();
         } catch (MoodAnalysisException e) {
             assert e.type.equals(ExceptionType.EMPTY_MESSAGE) : "Test Case 3.2 Failed";
         }
