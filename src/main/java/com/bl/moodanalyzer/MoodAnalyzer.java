@@ -1,35 +1,26 @@
 package com.bl.moodanalyzer;
 
 public class MoodAnalyzer {
-     String message;
+    private String message;
+
+    public MoodAnalyzer() {
+        this.message = "";
+    }
 
     public MoodAnalyzer(String message) {
         this.message = message;
     }
-
     public String analyseMood() {
-        if (message.contains("happy")) {
-            return "Happy";
-        } else if (message.contains("sad")) {
+        if (message.contains("sad")) {
             return "Sad";
         } else {
-            return "Unknown";
+            return "Happy";
         }
     }
     public static void main(String[] args) {
-        System.out.println("Welcome to the Mood Analyzer Problem");
-        MoodAnalyzer analyser = new MoodAnalyzer("I am feeling sad today");
+        MoodAnalyzer analyser = new MoodAnalyzer("I am feeling happy");
         String mood = analyser.analyseMood();
-        System.out.println("Mood: " + mood);
-        MoodAnalyzer.testAnalyseMood();
-    }
-    public static void testAnalyseMood() {
-        MoodAnalyzer analyser = new MoodAnalyzer("I am in Sad Mood");
-        String mood = analyser.analyseMood();
-        assert mood.equals("Sad") : "Test Case 1.1 Failed";
+        System.out.println("The mood is " + mood);
 
-        analyser = new MoodAnalyzer("I am in Any Mood");
-        mood = analyser.analyseMood();
-        assert mood.equals("Happy") : "Test Case 1.2 Failed";
     }
 }
